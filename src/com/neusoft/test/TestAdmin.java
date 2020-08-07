@@ -10,5 +10,8 @@ public class TestAdmin {
         AdminDao adminDao = new AdminDaoImpl();
         Admin admin = adminDao.getAdminByNameByPass("zhangsan", "123");
         System.out.println(admin);
+        // update
+//        Admin admin2 = new Admin(2, "lisi", "1233");
+//        adminDao.updateAdmin(admin2);
     }
 }

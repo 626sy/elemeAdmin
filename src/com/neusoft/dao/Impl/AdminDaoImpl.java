@@ -15,7 +15,7 @@ public class AdminDaoImpl implements AdminDao {
     private PreparedStatement pstmt =null;
     private ResultSet rs =null;
 
-
+    // 查询
     @Override
     public Admin getAdminByNameByPass(String adminName, String password) {
         Admin admin = null;
@@ -40,4 +40,25 @@ public class AdminDaoImpl implements AdminDao {
 
         return admin;
     }
+
+    @Override
+    public void updateAdmin(Admin admin) {
+        Admin admin1 = new Admin();
+        String sql = "update admin set adminName = ?,password = ? where id = ?;";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,admin.getAdminName());
+            pstmt.setString(2,admin.getPassword());
+            pstmt.setInt(3,admin.getAdminId());
+            int count = pstmt.executeUpdate();
+            System.out.println(count+"运行成功");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(pstmt,conn);
+        }
+    }
+
+    // 修改
 }
