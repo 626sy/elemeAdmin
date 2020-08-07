@@ -1,5 +1,6 @@
 package com.neusoft;
 
+import com.neusoft.dao.Impl.BusinessDaoImpl;
 import com.neusoft.domain.Admin;
 import com.neusoft.domain.Business;
 import com.neusoft.view.AdminView;
@@ -43,12 +44,15 @@ public class ElmAdmin {
                     break;
                 case 2:
                     System.out.println("2.搜索商家");
+                    businessView.listBusinessBySearch();
                     break;
                 case 3:
                     System.out.println("3.新建商家");
+                    businessView.saveBusiness();
                     break;
                 case 4:
                     System.out.println("4.删除商家");
+                    businessView.deleteBusiness();
                     break;
                 case 5:
                     System.out.println("========= 欢迎下次光临饿了么系统 =========");
