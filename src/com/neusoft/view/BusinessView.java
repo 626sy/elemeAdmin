@@ -7,4 +7,5 @@ public interface BusinessView {
     public void saveBusiness();
 
     public void deleteBusiness();
+    public void removeBusiness1();
 }

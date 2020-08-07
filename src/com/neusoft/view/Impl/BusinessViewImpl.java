@@ -75,16 +75,35 @@ public class BusinessViewImpl implements BusinessView {
 
     @Override
     public void deleteBusiness() {
-        String p = " ";
+
         System.out.println("请输入商家编号：");
         int id = input.nextInt();
         BusinessDaoImpl dao = new BusinessDaoImpl();
         int businessId = dao.deleBusiness(id);
         System.out.println("确定要删除吗（y/n)");
-        p = input.next();
+        String p = input.next();
         if (p.equals("y")){
             if (businessId>0){
                 System.out.println("删除成功"+businessId);
+            }
+            else {
+                System.out.println("删除失败");
+            }
+        }
+    }
+
+
+    @Override
+    public void removeBusiness1(){
+        System.out.println("请输入商家编号：");
+        int id = input.nextInt();
+        BusinessDaoImpl dao = new BusinessDaoImpl();
+        int i = dao.removeBusiness(id);
+        System.out.println("确定要删除吗（y/n)");
+        String p = input.next();
+        if (p.equals("y")){
+            if (i==1){
+                System.out.println("删除成功"+i);
             }
             else {
                 System.out.println("删除失败");

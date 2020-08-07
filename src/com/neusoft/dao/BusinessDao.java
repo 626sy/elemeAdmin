@@ -13,5 +13,6 @@ public interface BusinessDao {
     public int saveBusiness(String businessName);
     // 删除
     public int deleBusiness(Integer id);
+    public int removeBusiness(int id);
 
 }

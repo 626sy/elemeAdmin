@@ -149,7 +149,22 @@ public class BusinessDaoImpl implements BusinessDao {
         }
         return id;
     }
+    @Override
+    public int removeBusiness(int id){
+        int count = 0;
+        String sql = "delete from business where businessId = ?";
+        Business business = new Business();
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,id);
+            count = pstmt.executeUpdate();
 
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
+        return count;
+    }
 
 }
