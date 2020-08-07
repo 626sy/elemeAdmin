@@ -43,21 +43,28 @@ public class AdminDaoImpl implements AdminDao {
 
     @Override
     public void updateAdmin(Admin admin) {
-        Admin admin1 = new Admin();
-        String sql = "update admin set adminName = ?,password = ? where id = ?;";
+        int count = 0;
+        String sql = "update admin set adminName = ?,password = ? where adminId = ?;";
         try {
             conn = JDBCUtils.getConnection();
             pstmt = conn.prepareStatement(sql);
+//            pstmt.setString(1,rs.getString("adminName"));
+//            pstmt.setString(2,rs.getString("password"));
+//            pstmt.setInt(3,rs.getInt("adminId"));
             pstmt.setString(1,admin.getAdminName());
             pstmt.setString(2,admin.getPassword());
             pstmt.setInt(3,admin.getAdminId());
-            int count = pstmt.executeUpdate();
-            System.out.println(count+"运行成功");
+            count = pstmt.executeUpdate();
+            if (count == 1){
+                System.out.println("修改成功");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             JDBCUtils.close(pstmt,conn);
         }
+
     }
 
     // 修改

@@ -11,7 +11,10 @@ public class TestAdmin {
         Admin admin = adminDao.getAdminByNameByPass("zhangsan", "123");
         System.out.println(admin);
         // update
-//        Admin admin2 = new Admin(2, "lisi", "1233");
-//        adminDao.updateAdmin(admin2);
+        Admin admin2 = new Admin();
+        admin2.setAdminId(2);
+        admin2.setAdminName("赵四");
+        admin2.setPassword("456789");
+        adminDao.updateAdmin(admin2);
     }
 }
