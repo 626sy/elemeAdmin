@@ -1,5 +1,6 @@
 package com.neusoft.domain;
 
+import java.math.BigDecimal;
 import java.nio.charset.IllegalCharsetNameException;
 
 /**
@@ -11,11 +12,11 @@ public class Food {
     private Integer foodId;
     private String foodName;
     private String foodExplain;
-    private Float foodPrice;
+    private BigDecimal foodPrice;
     private Integer BusinessId;
     public Food(){}
 
-    public Food(Integer foodId, String foodName, String foodExplain, Float foodPrice, Integer businessId) {
+    public Food(Integer foodId, String foodName, String foodExplain, BigDecimal foodPrice, Integer businessId) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.foodExplain = foodExplain;
@@ -47,11 +48,11 @@ public class Food {
         this.foodExplain = foodExplain;
     }
 
-    public Float getFoodPrice() {
+    public BigDecimal getFoodPrice() {
         return foodPrice;
     }
 
-    public void setFoodPrice(Float foodPrice) {
+    public void setFoodPrice(BigDecimal foodPrice) {
         this.foodPrice = foodPrice;
     }
 

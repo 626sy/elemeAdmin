@@ -27,12 +27,12 @@ public class BusinessDaoImpl implements BusinessDao {
         if (businessName != null && !businessName.equals("")){
             // 传入了商家名
             sql.append("and businessName like '%").append(businessName).append("%'");
-            System.out.println(sql);
+
         }
         if (businessAddress != null && !businessAddress.equals("")){
             // 传入了地址
             sql.append("and businessAddress like '%").append(businessAddress).append("%'");
-            System.out.println(sql);
+
         }
         try {
             conn = JDBCUtils.getConnection();
@@ -134,7 +134,7 @@ public class BusinessDaoImpl implements BusinessDao {
     @Override
     public int deleBusiness(Integer id) {
 
-        String sql = "delete from business where businessId = ?";
+        String sql = new String("delete from business where businessId = ?");
         try {
             conn = JDBCUtils.getConnection();
             pstmt = conn.prepareStatement(sql);

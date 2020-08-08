@@ -17,7 +17,7 @@ public class BusinessViewImpl implements BusinessView {
     @Override
     public void listBusinessAll() {
         BusinessDaoImpl dao = new BusinessDaoImpl();
-        List<Business> list = dao.listBusiness("null", null);
+        List<Business> list = dao.listBusiness(null, null);
         System.out.println("商家编号\t商家地址\t商家名称\t商家介绍\t起送费\t配送费");
         for(Business b:list){
             System.out.println(b.getBusinessId()+"\t"+b.getBusinessAddress()+"\t"+b.getBusinessName()
