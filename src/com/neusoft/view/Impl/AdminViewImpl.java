@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class AdminViewImpl implements AdminView {
     private Scanner input = new Scanner(System.in);
 
+    /*页面登录*/
     @Override
     public Admin login() {
         System.out.println("请输入管理员用户名");

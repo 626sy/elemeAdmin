@@ -20,6 +20,7 @@ public class FoodDaoImpl implements FoodDao {
     private Connection conn = null;
     private PreparedStatement pstmt = null;
     private ResultSet rs = null;
+    /*查询信息*/
     @Override
     public List<Food> find(Integer id) {
         ArrayList<Food> list = new ArrayList<>();
@@ -51,7 +52,7 @@ public class FoodDaoImpl implements FoodDao {
 
         return list;
     }
-
+    /*添加信息*/
     @Override
     public int insert(String foodName) {
         int foodId = 0;
@@ -73,16 +74,40 @@ public class FoodDaoImpl implements FoodDao {
         }
         return foodId;
     }
-
+    /*更改信息*/
     @Override
-    public int update(Food food) {
-        return 0;
+    public int update(Integer id,String name) {
+        int count = 0;
+        String sql = new String("update food set foodName = ? where foodid=? ");
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,name);
+            pstmt.setInt(2,id);
+            count = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(pstmt,conn,rs);
+        }
+        return count;
     }
-
+    /*删除信息*/
     @Override
-    public int delete(Food food) {
-        return 0;
+    public int delete(Integer id) {
+        int count = 0;
+        String sql = new String("delete from food where foodId = ?");
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,id);
+            count = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(pstmt,conn,rs);
+        }
+        return count;
     }
-
 
 }

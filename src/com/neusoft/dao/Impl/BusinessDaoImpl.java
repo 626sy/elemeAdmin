@@ -19,7 +19,7 @@ public class BusinessDaoImpl implements BusinessDao {
     private Connection conn =null;
     private PreparedStatement pstmt =null;
     private ResultSet rs =null;
-    /*罗列*/
+    /*查询所有信息*/
     @Override
     public List<Business> listBusiness(String businessName, String businessAddress) {
         ArrayList<Business> list = new ArrayList<>();
@@ -58,9 +58,8 @@ public class BusinessDaoImpl implements BusinessDao {
 
         return list;
     }
-    /*
-    * 查询
-    */
+
+    /*根据索引查询*/
     @Override
     public List<Business> searchBusiness(String businessName, String businessAddress) {
         ArrayList<Business> list = new ArrayList<>();
@@ -100,7 +99,6 @@ public class BusinessDaoImpl implements BusinessDao {
         return list;
     }
 
-
     /*添加*/
     @Override
     public int saveBusiness(String businessName) {
@@ -128,7 +126,6 @@ public class BusinessDaoImpl implements BusinessDao {
 
         return businessId ;
     }
-
 
     /*删除*/
     @Override

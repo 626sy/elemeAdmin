@@ -25,8 +25,7 @@ public class TestFood {
 //            System.out.println(f.getBusinessId()+f.getFoodName()+f.getFoodExplain()+f.getFoodPrice()+f.getBusinessId());
 //        }
 
-//        BusinessViewImpl businessView = new BusinessViewImpl();
-//        businessView.saveBusiness();
+
         FoodDaoImpl foodDao = new FoodDaoImpl();
         foodDao.insert("sdfsd");
     }

@@ -12,12 +12,15 @@ import java.util.List;
  */
 public class TestBusiness {
     public static void main(String[] args) {
-        BusinessDaoImpl businessDao = new BusinessDaoImpl();
-        List<Business> list = businessDao.listBusiness("饺子", "null");
-        for(Business l:list){
-            System.out.println(l.getBusinessId()+l.getStartPrice());
-        }
+//        BusinessDaoImpl businessDao = new BusinessDaoImpl();
+//        List<Business> list = businessDao.listBusiness("饺子", "null");
+//        for(Business l:list){
+//            System.out.println(l.getBusinessId()+l.getStartPrice());
+//        }
+        BusinessViewImpl businessView = new BusinessViewImpl();
+//        businessView.saveBusiness();
 
+        businessView.removeBusiness1();
 
 
     }

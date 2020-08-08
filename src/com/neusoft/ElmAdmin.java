@@ -26,17 +26,15 @@ public class ElmAdmin {
         if (admin != null) {
             System.out.println("请选择服务，1、商家管理，2、食品管理");
             int s = input.nextInt();
-            if(s==1){
+            if (s == 1) {
                 work();
-            }else if (s==2){
+            }
+            if (s == 2) {
                 food();
             }
-
-        }
-        else {
+        } else {
             System.out.println("用户名或密码错误,请重新输入");
             adminView.login();
-
         }
     }
 
@@ -44,9 +42,7 @@ public class ElmAdmin {
         Scanner input = new Scanner(System.in);
         BusinessViewImpl businessView = new BusinessViewImpl();
         int menu = 0;
-
         while (menu != 5) {
-
             // 创建一个菜单
             System.out.println("========= 1.所有商家列表=2.搜索商家=3.新建商家=4.删除商家=5.退出系统 =========");
             System.out.println("请选择行相应的菜单编号");
@@ -81,39 +77,43 @@ public class ElmAdmin {
         }
 
     }
-    public static void food(){
+
+    public static void food() {
         Scanner sc = new Scanner(System.in);
         FoodViewEmpl foodViewEmpl = new FoodViewEmpl();
-        System.out.println("请输入操作方式");
-        int i = sc.nextInt();
-        switch (i){
-            case 1:
-                System.out.println("食物查询");
-                foodViewEmpl.find();
-                break;
-            case 2:
-                System.out.println("添加食物");
-                foodViewEmpl.insert();
-                break;
-            case 3:
-                System.out.println("修改食物信息");
-                break;
-            case 4:
-                System.out.println("删除食物");
-                break;
-            case 5:
-                System.out.println("显示所有食物");
-                break;
-            case 6:
-                System.out.println("退出");
-                break;
-            default:
-                System.out.println("没有该选项");
-                break;
-
-
+        int i = 0;
+        while (i!=6){
+            System.out.println("========= 1.食物查询=2.添加食物=3.修改食物信息=4.删除食物=5.显示所有食物=6.退出系统 =========");
+            System.out.println("请选择行相应的菜单编号");
+            i = sc.nextInt();
+            switch (i) {
+                case 1:
+                    System.out.println("食物查询");
+                    foodViewEmpl.find();
+                    break;
+                case 2:
+                    System.out.println("添加食物");
+                    foodViewEmpl.insert();
+                    break;
+                case 3:
+                    System.out.println("修改食物信息");
+                    foodViewEmpl.update();
+                    break;
+                case 4:
+                    System.out.println("删除食物");
+                    foodViewEmpl.delete();
+                    break;
+                case 5:
+                    System.out.println("显示所有食物");
+                    break;
+                case 6:
+                    System.out.println("退出");
+                    System.out.println("========= 欢迎下次光临饿了么系统 =========");
+                    break;
+                default:
+                    System.out.println("没有该选项");
+                    break;
+            }
         }
-
-
     }
 }
