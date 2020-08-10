@@ -14,5 +14,16 @@ public interface BusinessDao {
     // 删除
     public int deleBusiness(Integer id);
     public int removeBusiness(int id);
+    // 商家登录
+    public Business getBusinessByNameByPass(Integer businessId,String password);
+    // 修改商家信息
+    public int updateBusiness(Business business);
+    // 显示商家信息
+    public Business getBusinessByBusinessid(Integer businessId);
+
+    public int updateBusinessByPassword(Integer businessId, String password);
+
+    public Business getBusinessById(Integer businessId);
+
 
 }

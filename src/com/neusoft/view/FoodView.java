@@ -13,4 +13,9 @@ public interface FoodView {
     public void update();
     /*删除信息*/
     public void delete();
+    //==========================================================
+    public void showFoodList(Integer businessId);
+    public void saveFood(Integer businessId);
+    public void updateFood(Integer businessId);
+    public void removeFood(Integer businessId);
 }

@@ -109,5 +109,54 @@ public class FoodDaoImpl implements FoodDao {
         }
         return count;
     }
+//------------------------------------------------------------------------------------------
+    @Override
+    public List<Food> finaAll(Integer businessId) {
+
+        Food food = null;
+        ArrayList<Food> list = new ArrayList<>();
+        String sql = "select * from food where businessId = ?";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,businessId);
+            rs = pstmt.executeQuery();
+            while (rs.next()){
+                food = new Food();
+                food.setBusinessId(rs.getInt("businessId"));
+                food.setFoodName(rs.getString("foodName"));
+                food.setFoodId(rs.getInt("foodId"));
+                food.setFoodExplain(rs.getString("foodExplain"));
+                food.setFoodPrice(rs.getBigDecimal("foodPrice"));
+                list.add(food);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(pstmt,conn,rs);
+        }
+
+        return list;
+    }
+
+    @Override
+    public Food getFoodById(Integer foodId) {
+        return null;
+    }
+
+    @Override
+    public int saveFood(Food food) {
+        return 0;
+    }
+
+    @Override
+    public int updateFood(Food food) {
+        return 0;
+    }
+
+    @Override
+    public int deleteFood(Integer foodId) {
+        return 0;
+    }
 
 }

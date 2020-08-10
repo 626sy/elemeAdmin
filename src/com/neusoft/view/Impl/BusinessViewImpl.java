@@ -1,6 +1,7 @@
 package com.neusoft.view.Impl;
 
 import com.alibaba.druid.sql.visitor.SQLASTOutputVisitorUtils;
+import com.neusoft.dao.BusinessDao;
 import com.neusoft.dao.Impl.BusinessDaoImpl;
 import com.neusoft.domain.Business;
 import com.neusoft.view.BusinessView;
@@ -13,7 +14,7 @@ import java.util.Scanner;
  * @date 2020/8/7 15:18
  */
 public class BusinessViewImpl implements BusinessView {
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
     @Override
     public void listBusinessAll() {
         BusinessDaoImpl dao = new BusinessDaoImpl();
@@ -25,7 +26,7 @@ public class BusinessViewImpl implements BusinessView {
         }
 
     }
-
+//  按关键字查询商家信息
     @Override
     public void listBusinessBySearch() {
         String businessName = "";
@@ -56,8 +57,7 @@ public class BusinessViewImpl implements BusinessView {
 
     }
 
-
-    // 保存
+    // 新建商家信息
     @Override
     public void saveBusiness() {
         System.out.println("请输入商家名字：");
@@ -72,7 +72,7 @@ public class BusinessViewImpl implements BusinessView {
         }
 
     }
-
+//  删除商家信息1
     @Override
     public void deleteBusiness() {
 
@@ -91,8 +91,7 @@ public class BusinessViewImpl implements BusinessView {
             }
         }
     }
-
-
+//  删除商家信息2
     @Override
     public void removeBusiness1(){
         System.out.println("请输入商家编号：");
@@ -110,8 +109,87 @@ public class BusinessViewImpl implements BusinessView {
             }
         }
     }
+//  商家登录
+    @Override
+    public Business login() {
+        System.out.println("请输入商家id");
+        Integer businessId = input.nextInt();
+        System.out.println("请输入商家密码");
+        String password = input.next();
+        BusinessDaoImpl businessDao = new BusinessDaoImpl();
 
+        return businessDao.getBusinessByNameByPass(businessId, password);
+    }
+    // 查看商家信息
+    @Override
+    public void showBusinessById(Integer businessId) {
+        BusinessDaoImpl businessDao = new BusinessDaoImpl();
+        Business business = businessDao.getBusinessByBusinessid(businessId);
+        System.out.println(business);
+    }
+//  修改商家信息
+    @Override
+    public void update(Integer businessId) {
+        BusinessDao businessDao = new BusinessDaoImpl();
+        Business business = businessDao.getBusinessByBusinessid(businessId);
+        String inputStr = " ";
+        System.out.println(business);
+        System.out.println("是否修改商家名称（y/n）");
+        inputStr = input.next();
+        if (inputStr.equals("y")){
+            System.out.println("请输入新的商家名称");
+             business.setBusinessName(input.next());
+        }
+        if (inputStr.equals("y")){
+            System.out.println("请输入新的商家地址");
+            business.setBusinessAddress(input.next());
+        }
+        if (inputStr.equals("y")){
+            System.out.println("请输入新的商家解释");
+            business.setBusinessExplain(input.next());
+        }
+        if (inputStr.equals("y")){
+            System.out.println("请输入新的starPrice");
+            business.setStartPrice(input.nextDouble());
+        }
+        if (inputStr.equals("y")){
+            System.out.println("请输入新的deliveryPrice");
+            business.setDeliveryPrice(input.next());
+        }
 
+        int result = businessDao.updateBusiness(business);
+        if (result>0){
+            System.out.println("修改成功");
+        }else {
+            System.out.println("修改失败");
+        }
+    }
 
+//  密码更新
+    @Override
+    public void updateBusinessByPassword(Integer businessId) {
+        BusinessDao dao = new BusinessDaoImpl();
+        Business business = dao.getBusinessById(businessId);
+
+        System.out.println("\n请输入旧密码：");
+        String oldPass = input.next();
+        System.out.println("\n请输入新密码：");
+        String password = input.next();
+        System.out.println("\n请再次输入新密码：");
+        String beginPassword = input.next();
+
+        if(!business.getPassword().equals(oldPass)) {
+            System.out.println("\n旧密码输入错误！");
+        }else if(!password.equals(beginPassword)) {
+            System.out.println("\n两次输入密码不一致！");
+        }else {
+            int result = dao.updateBusinessByPassword(businessId, password);
+            if(result>0) {
+                System.out.println("\n修改密码成功！");
+            }else {
+                System.out.println("\n修改密码失败！");
+            }
+        }
+    }
 
 }
