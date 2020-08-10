@@ -1,5 +1,6 @@
 package com.neusoft.view.Impl;
 
+import com.mchange.v2.util.XORShiftRandomUtils;
 import com.neusoft.dao.FoodDao;
 import com.neusoft.dao.Impl.FoodDaoImpl;
 import com.neusoft.domain.Food;
@@ -71,7 +72,7 @@ public class FoodViewEmpl implements FoodView {
         }
 
     }
-
+/*==============================================================================================*/
     @Override
     public void showFoodList(Integer businessId) {
         FoodDao foodDao = new FoodDaoImpl();
@@ -108,11 +109,67 @@ public class FoodViewEmpl implements FoodView {
 
     @Override
     public void updateFood(Integer businessId) {
+        FoodDao foodDao = new FoodDaoImpl();
+        List<Food> list = foodDao.finaAll(businessId);
+        if (list.size()!=0){
+
+            System.out.println("请选择更新的食品编号");
+            int foodid = input.nextInt();
+            Food food = foodDao.getFoodById(foodid);
+            System.out.println(food);
+
+            String inputstr = "";
+            System.out.println("是否更新食品名称(y/n)：");
+            inputstr = input.next();
+            if (inputstr.equals("y")){
+                System.out.println("请输入新的食品名称");
+                food.setFoodName(input.next());
+            }
+            System.out.println("是否更新食品解释(y/n)：");
+            inputstr = input.next();
+            if (inputstr.equals("y")){
+                System.out.println("请输入新的食品解释");
+                food.setFoodExplain(input.next());
+            }
+            System.out.println("是否更新食品价格(y/n)：");
+            inputstr = input.next();
+            if (inputstr.equals("y")){
+                System.out.println("请输入新的食品价格");
+                food.setFoodPrice(input.nextBigDecimal());
+            }
+            int result = foodDao.updateFood(food);
+            if (result>0){
+                System.out.println("食品修改成功");
+            }else {
+                System.out.println("食品修改失败");
+            }
+        }else {
+            System.out.println("没有食品");
+        }
 
     }
 
     @Override
     public void removeFood(Integer businessId) {
+        FoodDaoImpl dao = new FoodDaoImpl();
+        List<Food> list = dao.finaAll(businessId);
+        if (list.size()!=0){
+            String inputstr = "";
+            System.out.println("请选择删除的食品编号");
+            int foodId = input.nextInt();
+            System.out.println("确定删除该食品吗(y/n)：");
+            inputstr = input.next();
+            if (inputstr.equals("y")){
+                int result = dao.deleteFood(foodId);
+                if (result>0){
+                    System.out.println("删除成功");
+                }else {
+                    System.out.println("删除失败");
+                }
+            }
+        }else {
+            System.out.println("没有该食品");
+        }
 
     }
 }

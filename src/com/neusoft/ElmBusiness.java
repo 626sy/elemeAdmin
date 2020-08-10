@@ -40,7 +40,7 @@ public class ElmBusiness {
                         break;
                     case 3:
                         System.out.println("更新密码");
-
+                        businessView.updateBusinessByPassword(business.getBusinessId());
                         break;
                     case 4:
                         System.out.println("所属商品管理");
@@ -101,14 +101,14 @@ public class ElmBusiness {
 
     }*/
 
-
+//  根据商家id进行食品的操作
     private  static  void foodManage(int businessId){
         FoodView foodview = new FoodViewEmpl();
         int menu = 0;
         while (menu!= 5){
 
             // 创建一个菜单
-            System.out.println("========= 二级菜单（美食管理）1.查看食品列表2.新增食品 3.修改食品=4.删除食品=5.返回一级菜单 =========");
+            System.out.println("========= 二级菜单（美食管理）1.查看食品列表 2.新增食品 3.修改食品=4.删除食品=5.返回一级菜单 =========");
             System.out.println("请选择相应的菜单编号");
             menu = input.nextInt();
 
@@ -118,15 +118,15 @@ public class ElmBusiness {
                     break;
                 case 2:
                     System.out.println("新增食品");
-
+                    foodview.saveFood(businessId);
                     break;
                 case 3:
                     System.out.println("修改食品");
-
+                    foodview.updateFood(businessId);
                     break;
                 case 4:
                     System.out.println("删除食品");
-
+                    foodview.removeFood(businessId);
                     break;
                 case 5:
                     break;

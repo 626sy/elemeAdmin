@@ -110,6 +110,7 @@ public class FoodDaoImpl implements FoodDao {
         return count;
     }
 //------------------------------------------------------------------------------------------
+    // 显示所有food信息
     @Override
     public List<Food> finaAll(Integer businessId) {
 
@@ -138,25 +139,91 @@ public class FoodDaoImpl implements FoodDao {
 
         return list;
     }
-
+    // 根据id获得food信息
     @Override
     public Food getFoodById(Integer foodId) {
-        return null;
-    }
+        String sql = "select * from food where foodId = ?";
+        Food food = null;
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,foodId);
+            rs = pstmt.executeQuery();
+            while (rs.next()){
+                food = new Food();
 
+                food.setFoodId(rs.getInt("foodId"));
+                food.setFoodName(rs.getString("foodName"));
+                food.setFoodExplain(rs.getString("foodExplain"));
+                food.setFoodPrice(rs.getBigDecimal("foodPrice"));
+                food.setBusinessId(rs.getInt("businessId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(pstmt,conn,rs);
+        }
+        return food;
+    }
+    // 保存
     @Override
     public int saveFood(Food food) {
-        return 0;
-    }
+        String sql = "insert into food values(null,?,?,?,?)";
+        int result = 0;
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, food.getFoodName());
+            pstmt.setString(2, food.getFoodExplain());
+            pstmt.setBigDecimal(3, food.getFoodPrice());
+            pstmt.setInt(4, food.getBusinessId());
+            result = pstmt.executeUpdate();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(pstmt,conn);
+        }
+
+        return result;
+    }
+    // 更新
     @Override
     public int updateFood(Food food) {
-        return 0;
+        int result = 0;
+        String sql = "update food set foodName = ?,foodExplain = ?,foodPrice = ? where foodId =?";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, food.getFoodName());
+            pstmt.setString(2, food.getFoodExplain());
+            pstmt.setBigDecimal(3, food.getFoodPrice());
+            pstmt.setInt(4, food.getFoodId());
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(pstmt,conn);
+        }
+        return result;
     }
-
+    // 删除
     @Override
     public int deleteFood(Integer foodId) {
-        return 0;
+        int result = 0;
+        String sql = "delete from food where foodId = ?";
+        try {
+            conn = JDBCUtils.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,foodId);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.close(pstmt,conn);
+        }
+        return result;
     }
 
 }

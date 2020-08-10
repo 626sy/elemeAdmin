@@ -140,18 +140,26 @@ public class BusinessViewImpl implements BusinessView {
             System.out.println("请输入新的商家名称");
              business.setBusinessName(input.next());
         }
+        System.out.println("是否修改商家名称（y/n）");
+        inputStr = input.next();
         if (inputStr.equals("y")){
             System.out.println("请输入新的商家地址");
             business.setBusinessAddress(input.next());
         }
+        System.out.println("是否修改商家名称（y/n）");
+        inputStr = input.next();
         if (inputStr.equals("y")){
             System.out.println("请输入新的商家解释");
             business.setBusinessExplain(input.next());
         }
+        System.out.println("是否修改商家名称（y/n）");
+        inputStr = input.next();
         if (inputStr.equals("y")){
             System.out.println("请输入新的starPrice");
             business.setStartPrice(input.nextDouble());
         }
+        System.out.println("是否修改商家名称（y/n）");
+        inputStr = input.next();
         if (inputStr.equals("y")){
             System.out.println("请输入新的deliveryPrice");
             business.setDeliveryPrice(input.next());

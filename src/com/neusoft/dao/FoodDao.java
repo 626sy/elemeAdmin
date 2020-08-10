@@ -11,7 +11,9 @@ public interface FoodDao {
     public int delete(Integer id);
 
     //--------------------------------------------------
+
     public List<Food> finaAll(Integer businessId);
+    // 根据id获得food信息
     public Food getFoodById(Integer foodId);
     public int saveFood(Food food);
     public int updateFood(Food food);
