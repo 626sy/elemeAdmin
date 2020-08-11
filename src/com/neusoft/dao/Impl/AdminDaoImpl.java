@@ -48,12 +48,12 @@ public class AdminDaoImpl implements AdminDao {
         try {
             conn = JDBCUtils.getConnection();
             pstmt = conn.prepareStatement(sql);
-//            pstmt.setString(1,rs.getString("adminName"));
-//            pstmt.setString(2,rs.getString("password"));
-//            pstmt.setInt(3,rs.getInt("adminId"));
-            pstmt.setString(1,admin.getAdminName());
-            pstmt.setString(2,admin.getPassword());
-            pstmt.setInt(3,admin.getAdminId());
+            pstmt.setString(1,rs.getString("adminName"));
+            pstmt.setString(2,rs.getString("password"));
+            pstmt.setInt(3,rs.getInt("adminId"));
+//            pstmt.setString(1,admin.getAdminName());
+//            pstmt.setString(2,admin.getPassword());
+//            pstmt.setInt(3,admin.getAdminId());
             count = pstmt.executeUpdate();
             if (count == 1){
                 System.out.println("修改成功");
